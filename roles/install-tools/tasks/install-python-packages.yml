@@ -1,0 +1,10 @@
+---
+
+- name: Install Python packages
+  pip:
+    name: "{{ packages }}"
+    executable: pip3
+  vars:
+    packages:
+    - ansible
+    - jmespath

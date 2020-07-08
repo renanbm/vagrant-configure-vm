@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "ansible" do |ansible|
         ansible.compatibility_mode = "2.0"
-        ansible.playbook = "playbooks/configureVM.yml"
+        ansible.playbook = "playbooks/configure-virtual-machine.yml"
         ansible.become = true
         ansible.groups = {
             "setup_vm" => ["ubuntu-lab"]

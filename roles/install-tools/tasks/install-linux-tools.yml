@@ -1,0 +1,27 @@
+---
+- name: Update APT Cache
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+    force_apt_get: yes
+  
+- name: Install packages
+  package:
+    name: "{{ packages }}"
+    state: present
+    autoclean: yes
+    autoremove: yes
+    update_cache: yes
+  vars:
+    packages:
+    - docker
+    - python3
+    - python3-pip
+    - git
+    - git-crypt
+    - gnupg2
+    - rust-bat

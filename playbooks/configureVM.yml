@@ -1,4 +1,0 @@
----
-- hosts: setup_vm
-  roles:
-    - install-tools

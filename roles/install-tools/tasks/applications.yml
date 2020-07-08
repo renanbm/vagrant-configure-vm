@@ -1,8 +1,0 @@
----
-- name: Download binaries
-  get_url:
-    url: '{{ item }}'
-    dest: '/usr/local/bin/{{ item }}'
-    mode: 0555
-  with_items:
-    - 

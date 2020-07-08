@@ -1,9 +1,3 @@
 ---
-- name: Install-tools
-  file:
-    path: '{{ item }}'
-    state: 'directory'
-  with_items:
-    - '{{  }}'
-
-- import_tasks: applications.yml
+- import_tasks: install-linux-tools.yml
+- import_tasks: install-python-packages.yml

@@ -1,0 +1,6 @@
+---
+- hosts: setup_vm
+  roles:
+    - install-tools
+    - apply-credentials
+    - apply-configurations

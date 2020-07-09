@@ -33,6 +33,8 @@ Vagrant.configure("2") do |config|
         end
     end
 
+    config.ssh.private_key_path = '~/.ssh/id_rsa'
+
     config.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=700"]
     config.vm.synced_folder "C:\\Source Codes\\", "/home/vagrant/Source Codes/", mount_options: ["dmode=700,fmode=700"]
 

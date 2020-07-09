@@ -18,10 +18,39 @@
     update_cache: yes
   vars:
     packages:
-    - docker
+    - docker.io
     - python3
     - python3-pip
     - git
     - git-crypt
     - gnupg2
     - bat
+
+- name: Start docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add vagrant user to docker group
+  user:
+    name: 'vagrant'
+    groups: 'docker'
+    append: 'yes'
+
+- name: Bat - Setup base directory
+  file:
+    path: '{{ item.path }}'
+    group: 'vagrant'
+    owner: 'vagrant'
+    state: directory
+  with_items:
+  - { path: '{{ bat_path }}' }
+
+- name: Bat - Create symbolic link 
+  file:
+    src: "/usr/bin/batcat"
+    dest: "{{ item.path }}/bat"
+    state: link
+  with_items:
+  - { path: '{{ bat_path }}' }

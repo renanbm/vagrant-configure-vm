@@ -1,9 +1,8 @@
 ---
-
 ssh_path: '/home/vagrant/.ssh'
 
 ssh_files:
   - { ssh_key: 'authorized_keys', mode: '0600' }
-  - { ssh_key: 'id_rsa'     , mode: '0600' }
-  - { ssh_key: 'id_rsa.pub' , mode: '0664' }
+  - { ssh_key: 'id_rsa'         , mode: '0600' }
+  - { ssh_key: 'id_rsa.pub'     , mode: '0664' }
   - { ssh_key: 'known_hosts'    , mode: '0644' }

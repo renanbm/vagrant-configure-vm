@@ -1,3 +1,15 @@
-# git name
-# git email
-# git config --global diff.ansible-vault.textconv "ansible-vault view"
+---
+- git_config:
+    name: user.name
+    scope: global
+    value: "Renan Ben Moshe"
+
+- git_config:
+    name: user.email
+    scope: global
+    value: "renan.moshe@telefonica.com"
+
+- git_config:
+    name: diff.ansible-vault.textconv
+    scope: global
+    value: "ansible-vault view"

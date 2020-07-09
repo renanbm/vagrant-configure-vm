@@ -1,5 +1,4 @@
 ---
-
 - name: Install Python packages
   pip:
     name: "{{ packages }}"

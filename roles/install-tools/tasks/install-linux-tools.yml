@@ -24,4 +24,4 @@
     - git
     - git-crypt
     - gnupg2
-    - rust-bat
+    - bat

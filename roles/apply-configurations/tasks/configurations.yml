@@ -1,1 +1,3 @@
+# git name
+# git email
 # git config --global diff.ansible-vault.textconv "ansible-vault view"

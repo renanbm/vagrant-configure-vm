@@ -1,19 +1,36 @@
+require 'dotenv/load'
+
+vms = {
+    "ubuntu-lab" => {
+        :vm_box => "bento/ubuntu-20.04",
+        :vm_box_version => "202005.21.0",
+        :vm_cpu => ENV['UBUNTU_LAB_CPU'],
+        :vm_ram => ENV['UBUNTU_LAB_RAM'],
+        :vm_disk_size => ENV['UBUNTU_LAB_DISK_SIZE'],
+        :vm_ip => ENV['UBUNTU_LAB_IP']
+    }
+}
+
 Vagrant.configure("2") do |config|
-  
-    config.vm.hostname    = "ubuntu-lab"
-    config.vm.box         = "bento/ubuntu-20.04"
-    config.vm.box_version = "202005.21.0"
-    config.disksize.size  = "40GB"
 
-    config.vm.network "private_network", ip: "192.168.50.100",
-        virtualbox__intnet: true
+    vms.each do | vm_name, vm_params |
 
-    config.vm.network "forwarded_port", guest: 22, host: 2222
-    config.vm.network "forwarded_port", guest: 8080, host: 8080
+        config.vm.define "#{vm_name}" do |vm_item|
+        
+            vm_item.vm.hostname    = "#{vm_name}"
+            vm_item.vm.box         = "#{vm_params[:vm_box]}"
+            vm_item.vm.box_version = "#{vm_params[:vm_box_version]}"
+            vm_item.disksize.size  = "#{vm_params[:vm_disk_size]}"
 
-    config.vm.provider "virtualbox" do |vm_item_vb|
-        vm_item_vb.cpus          = "2"
-        vm_item_vb.memory        = "6144"
+            vm_item.vm.network "private_network", ip: "#{vm_params[:vm_ip]}", virtualbox__intnet: true
+            vm_item.vm.network "forwarded_port", guest: 22, host: 2222
+            vm_item.vm.network "forwarded_port", guest: 8080, host: 8080
+
+            vm_item.vm.provider "virtualbox" do |vm_item_vb|
+                vm_item_vb.cpus     = vm_params[:vm_cpu]
+                vm_item_vb.memory   = vm_params[:vm_ram]
+            end
+        end
     end
 
     config.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=700"]
@@ -33,5 +50,4 @@ Vagrant.configure("2") do |config|
             "ubuntu-lab" => ["localhost"]
         }
     end
-
 end
